@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkproduct_dashboard=self.webpackChunkproduct_dashboard||[]).push([[7695],{7695:(a,d,r)=>{r.r(d),r.d(d,{default:()=>s.n});var s=r(42499)}}]);
