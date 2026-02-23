@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { styled, Container, useTheme } from "@mui/material";
+import { styled, Box, useTheme } from "@mui/material";
 import { Outlet } from "react-router-dom";
 import { Header } from "../header";
 import { Footer } from "../footer";
@@ -16,7 +16,18 @@ const PageWrapper = styled("div")(() => ({
   flexGrow: 1,
   flexDirection: "column",
   zIndex: 1,
-  backgroundColor: "transparent"
+  backgroundColor: "transparent",
+  width: "100%",
+  minWidth: 0
+}));
+
+const FullWidthContainer = styled(Box)(() => ({
+  width: "100%",
+  maxWidth: "100%",
+  padding: 0,
+  margin: 0,
+  boxSizing: "border-box",
+  minWidth: 0
 }));
 
 const Layout = () => {
@@ -25,18 +36,17 @@ const Layout = () => {
     <MainWrapper>
       <PageWrapper>
         <Header />
-        <Container
+        <FullWidthContainer
           sx={{
             padding: "0px !important",
             [theme.breakpoints.up("sm")]: {
               maxWidth: "100%"
             },
-            width: "calc(100vw - 6px)"
           }}
         >
           <Outlet />
           {Notifications()}
-        </Container>
+        </FullWidthContainer>
         <Footer />
       </PageWrapper>
     </MainWrapper>

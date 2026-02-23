@@ -55,6 +55,7 @@ const Header: FC = () => {
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
+              position: "relative",
               flexDirection: { xs: "column", lg: "row" },
               transition: theme => theme.transitions.create(["top"]),
               ...matchMobileView && {

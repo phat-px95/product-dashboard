@@ -1,4 +1,9 @@
 .App {
   text-align: center;
   background-color: #f2f5f5;
+  width: 100%;
+}
+
+.MuiSvgIcon-root.MuiSvgIcon-fontSizeMedium {
+  fill: #0E6E6B;
 }

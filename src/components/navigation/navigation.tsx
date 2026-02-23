@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import Box from "@mui/material/Box";
 import { navigations } from "./navigation.data";
-import { Link } from "@mui/material";
+import { Link, useTheme } from "@mui/material";
 import { useLocation } from "react-router-dom";
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 
@@ -13,6 +13,7 @@ type NavigationData = {
 const Navigation: FC = () => {
   const location = useLocation();
   const currentPath = location.pathname;
+  const theme = useTheme();
 
   return (
     <Box
@@ -20,7 +21,8 @@ const Navigation: FC = () => {
         display: "flex",
         flexFlow: "wrap",
         justifyContent: "end",
-        flexDirection: { xs: "column", lg: "row" }
+        flexDirection: { xs: "column", lg: "row" },
+        alignItems: { xs: "center", lg: "flex-end" }
       }}
     >
       {navigations.map(({ path: destination, label }: NavigationData) =>
@@ -31,49 +33,44 @@ const Navigation: FC = () => {
           sx={{
             display: "inline-flex",
             position: "relative",
-            color: currentPath === destination ? "" : "white",
+            color: currentPath === destination 
+              ? theme.palette.primary.main 
+              : { 
+                  xs: theme.palette.text.primary, // Dark text on mobile
+                  lg: "white" // White text on desktop
+                },
             lineHeight: "30px",
             letterSpacing: "3px",
-            cursor: "pointer",
             textDecoration: "none",
-            textTransform: "uppercase",
-            fontWeight: 700,
-            alignItems: "center",
-            justifyContent: "center",
-            px: { xs: 0, lg: 3 },
-            mb: { xs: 3, lg: 0 },
-            fontSize: "20px",
-            ...destination === "/" && { color: "primary.main" },
-            "& > div": { display: "none" },
-            "&.current>div": { display: "block" },
+            padding: { xs: "8px 16px", lg: "4px 8px" },
+            margin: { xs: "4px 0", lg: "0 8px" },
+            borderRadius: { xs: "4px", lg: "0" },
+            backgroundColor: { xs: "rgba(255,255,255,0.1)", lg: "transparent" },
+            transition: "all 0.3s ease",
+            fontSize: { xs: "0.9rem", lg: "1rem" },
+            fontWeight: { xs: 500, lg: 400 },
             "&:hover": {
-              color: "text.disabled"
+              color: currentPath === destination 
+                ? theme.palette.primary.main
+                : {
+                    xs: theme.palette.primary.main,
+                    lg: theme.palette.primary.light
+                  },
+              backgroundColor: { 
+                xs: "rgba(255,255,255,0.2)", 
+                lg: "rgba(255,255,255,0.1)" 
+              },
+              transform: { xs: "none", lg: "translateY(-2px)" }
             }
           }}
         >
-          <Box
-            sx={{
-              position: "absolute",
-              top: 12,
-              transform: "rotate(3deg)",
-              "& img": { width: 44, height: "auto" }
-            }}
-          >
-            {/* eslint-disable-next-line */}
-            <img src="/images/headline-curve.svg" alt="Headline curve" />
-          </Box>
           {label}
         </Box>
       )}
-      <Box
-        sx={{
-          display: 'inline-flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          px: { xs: 0, lg: 3 },
-          mb: { xs: 3, lg: 0 },
-        }}
-      >
+      <Box sx={{ 
+        mt: { xs: 2, lg: 0 },
+        ml: { xs: 0, lg: 2 }
+      }}>
         <ConnectButton />
       </Box>
     </Box>

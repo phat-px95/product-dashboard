@@ -3,7 +3,8 @@ import { styled } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 
 const StyledLogo = styled("img")({
-  height: "120px"
+  height: "120px",
+  padding: "16px",
 });
 
 export const Logo = () => {
